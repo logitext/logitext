@@ -9,3 +9,4 @@ D:\Repos\logitext\LogiText\Scraper\obj\Debug\netstandard2.0\Scraper.AssemblyInfo
 D:\Repos\logitext\LogiText\Scraper\obj\Debug\netstandard2.0\Scraper.csproj.CopyComplete
 D:\Repos\logitext\LogiText\Scraper\obj\Debug\netstandard2.0\Scraper.dll
 D:\Repos\logitext\LogiText\Scraper\obj\Debug\netstandard2.0\Scraper.pdb
+D:\Repos\logitext\LogiText\Scraper\obj\Debug\netstandard2.0\Scraper.csprojAssemblyReference.cache

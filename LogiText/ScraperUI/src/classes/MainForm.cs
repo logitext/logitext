@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using LogiText.Data;
-
 using Scraper;
 using ScraperUI.src;
 

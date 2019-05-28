@@ -14,10 +14,10 @@ namespace LogiText.Data
             "imgURL"
         };
 
-        public string name { get; set; }
-        public int ISBN { get; set; }
-        public float price { get; set; }
-        public string url { get; set; }
+        public string name   { get; set; }
+        public int    ISBN   { get; set; }
+        public float  price  { get; set; }
+        public string url    { get; set; }
         public string imgURL { get; set; }
 
         public Book() { }
