@@ -1,0 +1,9 @@
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\LogiText\bin\Debug\netstandard2.0\LogiText.deps.json
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\LogiText\bin\Debug\netstandard2.0\LogiText.dll
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\LogiText\bin\Debug\netstandard2.0\LogiText.pdb
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\LogiText\obj\Debug\netstandard2.0\LogiText.csprojAssemblyReference.cache
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\LogiText\obj\Debug\netstandard2.0\LogiText.csproj.CoreCompileInputs.cache
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\LogiText\obj\Debug\netstandard2.0\LogiText.AssemblyInfoInputs.cache
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\LogiText\obj\Debug\netstandard2.0\LogiText.AssemblyInfo.cs
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\LogiText\obj\Debug\netstandard2.0\LogiText.dll
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\LogiText\obj\Debug\netstandard2.0\LogiText.pdb
