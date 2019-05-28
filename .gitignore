@@ -2,3 +2,15 @@
 ManageDB/
 
 LogiText/\.vs/
+
+LogiText/LogiText/bin/
+
+LogiText/LogiText/obj/
+
+LogiText/POS/obj/
+
+LogiText/Data/obj/
+
+LogiText/POS/bin/
+
+LogiText/Scraper/obj/

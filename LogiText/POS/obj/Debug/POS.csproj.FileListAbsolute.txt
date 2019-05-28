@@ -14,5 +14,19 @@ C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\obj\Debug\PO
 C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\Dapper.dll
 C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\System.Data.SqlClient.dll
 C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\Dapper.xml
-C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\Data.dll
-C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\Data.pdb
+D:\repos\logitext\LogiText\POS\bin\Debug\POS.exe.config
+D:\repos\logitext\LogiText\POS\bin\Debug\POS.exe
+D:\repos\logitext\LogiText\POS\bin\Debug\POS.pdb
+D:\repos\logitext\LogiText\POS\bin\Debug\Dapper.dll
+D:\repos\logitext\LogiText\POS\bin\Debug\LogiText.dll
+D:\repos\logitext\LogiText\POS\bin\Debug\System.Data.SqlClient.dll
+D:\repos\logitext\LogiText\POS\bin\Debug\LogiText.pdb
+D:\repos\logitext\LogiText\POS\bin\Debug\Dapper.xml
+D:\repos\logitext\LogiText\POS\obj\Debug\POS.csprojAssemblyReference.cache
+D:\repos\logitext\LogiText\POS\obj\Debug\POS.Form1.resources
+D:\repos\logitext\LogiText\POS\obj\Debug\POS.Properties.Resources.resources
+D:\repos\logitext\LogiText\POS\obj\Debug\POS.csproj.GenerateResource.cache
+D:\repos\logitext\LogiText\POS\obj\Debug\POS.csproj.CoreCompileInputs.cache
+D:\repos\logitext\LogiText\POS\obj\Debug\POS.csproj.CopyComplete
+D:\repos\logitext\LogiText\POS\obj\Debug\POS.exe
+D:\repos\logitext\LogiText\POS\obj\Debug\POS.pdb
