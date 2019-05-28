@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28917.181
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS", "POS\POS.csproj", "{DD7B9537-AA08-4B07-8C03-AD7BA47A3993}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogiText", "LogiText\LogiText.csproj", "{EA7AE4F8-C267-41A7-B726-DAE86164401C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{124F4CB1-B5DA-4609-8F91-10F37AE3551A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScraperUI", "ScraperUI\ScraperUI.csproj", "{E5F2C2EA-4A65-4F8F-B83A-E3AB4B6CEF03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scraper", "Scraper\Scraper.csproj", "{023CEDA4-4F31-4953-872D-632020F9216E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +27,14 @@ Global
 		{EA7AE4F8-C267-41A7-B726-DAE86164401C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA7AE4F8-C267-41A7-B726-DAE86164401C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA7AE4F8-C267-41A7-B726-DAE86164401C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5F2C2EA-4A65-4F8F-B83A-E3AB4B6CEF03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5F2C2EA-4A65-4F8F-B83A-E3AB4B6CEF03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5F2C2EA-4A65-4F8F-B83A-E3AB4B6CEF03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5F2C2EA-4A65-4F8F-B83A-E3AB4B6CEF03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{023CEDA4-4F31-4953-872D-632020F9216E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{023CEDA4-4F31-4953-872D-632020F9216E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{023CEDA4-4F31-4953-872D-632020F9216E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{023CEDA4-4F31-4953-872D-632020F9216E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{124F4CB1-B5DA-4609-8F91-10F37AE3551A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{124F4CB1-B5DA-4609-8F91-10F37AE3551A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{124F4CB1-B5DA-4609-8F91-10F37AE3551A}.Release|Any CPU.ActiveCfg = Release|Any CPU

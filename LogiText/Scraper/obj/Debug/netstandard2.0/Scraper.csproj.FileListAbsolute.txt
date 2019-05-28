@@ -1,0 +1,11 @@
+D:\Repos\logitext\LogiText\Scraper\bin\Debug\netstandard2.0\Scraper.deps.json
+D:\Repos\logitext\LogiText\Scraper\bin\Debug\netstandard2.0\Scraper.dll
+D:\Repos\logitext\LogiText\Scraper\bin\Debug\netstandard2.0\Scraper.pdb
+D:\Repos\logitext\LogiText\Scraper\bin\Debug\netstandard2.0\LogiText.dll
+D:\Repos\logitext\LogiText\Scraper\bin\Debug\netstandard2.0\LogiText.pdb
+D:\Repos\logitext\LogiText\Scraper\obj\Debug\netstandard2.0\Scraper.csproj.CoreCompileInputs.cache
+D:\Repos\logitext\LogiText\Scraper\obj\Debug\netstandard2.0\Scraper.AssemblyInfoInputs.cache
+D:\Repos\logitext\LogiText\Scraper\obj\Debug\netstandard2.0\Scraper.AssemblyInfo.cs
+D:\Repos\logitext\LogiText\Scraper\obj\Debug\netstandard2.0\Scraper.csproj.CopyComplete
+D:\Repos\logitext\LogiText\Scraper\obj\Debug\netstandard2.0\Scraper.dll
+D:\Repos\logitext\LogiText\Scraper\obj\Debug\netstandard2.0\Scraper.pdb
