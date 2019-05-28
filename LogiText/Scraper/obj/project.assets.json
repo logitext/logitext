@@ -1613,11 +1613,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Repos\\logitext\\LogiText\\Scraper\\Scraper.csproj",
+      "projectUniqueName": "D:\\repos\\logitext\\LogiText\\Scraper\\Scraper.csproj",
       "projectName": "Scraper",
-      "projectPath": "D:\\Repos\\logitext\\LogiText\\Scraper\\Scraper.csproj",
+      "projectPath": "D:\\repos\\logitext\\LogiText\\Scraper\\Scraper.csproj",
       "packagesPath": "C:\\Users\\Max\\.nuget\\packages\\",
-      "outputPath": "D:\\Repos\\logitext\\LogiText\\Scraper\\obj\\",
+      "outputPath": "D:\\repos\\logitext\\LogiText\\Scraper\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1636,8 +1636,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "D:\\Repos\\logitext\\LogiText\\LogiText\\LogiText.csproj": {
-              "projectPath": "D:\\Repos\\logitext\\LogiText\\LogiText\\LogiText.csproj"
+            "D:\\repos\\logitext\\LogiText\\LogiText\\LogiText.csproj": {
+              "projectPath": "D:\\repos\\logitext\\LogiText\\LogiText\\LogiText.csproj"
             }
           }
         }

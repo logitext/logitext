@@ -1,5 +1,9 @@
 {
   "version": 1,
+<<<<<<< master:LogiText/Data/obj/Data.csproj.nuget.cache
   "dgSpecHash": "okaMSYzrW3e+HHQuQz8IzdiBOUmi7uQGl5OzEvwYDgk13gIUXnVsrEopenixcHQZDGUmAW8zYJq/KOGi2+D9LA==",
+=======
+  "dgSpecHash": "CM/eV8BWVRSTCLbxC58cm+nSLOt+c5ezSDMtTbIgAoT4a/OGZlCqaghgmRCw+x9qPdpuLUO9/Pgp1b9146Jk4Q==",
+>>>>>>> bin things:LogiText/LogiText/obj/LogiText.csproj.nuget.cache
   "success": true
 }
