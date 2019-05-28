@@ -14,3 +14,5 @@ C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\obj\Debug\PO
 C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\Dapper.dll
 C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\System.Data.SqlClient.dll
 C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\Dapper.xml
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\Data.dll
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\Data.pdb

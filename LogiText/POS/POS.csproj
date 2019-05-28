@@ -89,6 +89,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{124f4cb1-b5da-4609-8f91-10f37ae3551a}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LogiText\LogiText.csproj">
       <Project>{ea7ae4f8-c267-41a7-b726-dae86164401c}</Project>
       <Name>LogiText</Name>

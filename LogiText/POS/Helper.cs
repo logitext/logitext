@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+.NET Framework 4.7.2
+*/
+
 namespace POS
 {
     class Helper

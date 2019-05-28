@@ -4,6 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/*
+.NET Framework 4.7.2
+*/
+
 namespace POS
 {
     static class Program
@@ -17,10 +21,15 @@ namespace POS
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
-            string connStr = Helper.ConnVal("TestDB");
 
-            LogiText.Data.DBManager dB = new LogiText.Data.DBManager(connStr);
-            dB.CreateTable("TableNew3", "col1 int");
+            string connStr = Helper.ConnVal("TestDB");
+            Data.Connector connection = new Data.Connector(Helper.ConnVal("TestDB"));
+            Data.SqlManager dB = new Data.SqlManager(connection);
+            dB.DeleteTable("Test");
+
+            /*
+            | ----- CREATE BOOK CLASS FOR QUERYING AND INSERTING ----- |
+            */
         }
     }
 }
