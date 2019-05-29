@@ -36,7 +36,7 @@ namespace ScraperUI
             try
             {
                 r.name = (string)row.Cells[0].Value;
-                r.ISBN = (int)row.Cells[1].Value;
+                r.ISBN = (string)row.Cells[1].Value;
                 r.price = (float)row.Cells[2].Value;
                 r.url = (string)row.Cells[3].Value;
                 r.imgURL = (string)row.Cells[4].Value;
@@ -106,8 +106,45 @@ namespace ScraperUI
         // When the search button is clicked
         private void searchButton_Click(object sender, EventArgs e)
         {
-            Book book = Amazon.scrapeISBN(0553108034);
-            if  (book == null) return;
+            if (textBox1.Text.Length != 10) return;
+            string url = "https://www.amazon.com/Clash-Kings-Song-Fire-Book/dp/" + textBox1.Text + "/ref=tmm_hrd_swatch_0?_encoding=UTF8&qid=1559015792&sr=8-2";
+
+            // Restart progress bar and update label
+            { 
+                progress.Value = 0;
+                updateLabel.Text = "Downloading webpage...";
+                Update();
+            }
+
+            // Retrieve the page
+            string page = Amazon.getPage(url);
+
+            if (page == null)
+            {
+                showError("ISBN not valid!");
+
+                updateLabel.Text = "Click search to scrape for an ISBN";
+                progress.Value = 0;
+
+                return;
+            }
+
+            // Update progress bar and update label
+            { 
+                progress.Value = 50;
+                updateLabel.Text = "Finding information...";
+                Update();
+            }
+
+            Book book = Amazon.scrapeISBN(textBox1.Text, page);
+
+            progress.Value = 100;
+
+            if (book == null)
+            {
+                showError("ISBN not valid!");
+                return;
+            }
 
             DataGridViewRow row = new DataGridViewRow();
             row.CreateCells(data, 
@@ -119,6 +156,13 @@ namespace ScraperUI
             );
 
             data.Rows.Add(row);
+
+            updateLabel.Text = "Click search to scrape for an ISBN";
+        }
+
+        private void batchScrape_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

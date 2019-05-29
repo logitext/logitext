@@ -15,7 +15,7 @@ namespace LogiText.Data
         };
 
         public string name   { get; set; }
-        public int    ISBN   { get; set; }
+        public string ISBN   { get; set; }
         public float  price  { get; set; }
         public string url    { get; set; }
         public string imgURL { get; set; }
