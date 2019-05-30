@@ -4,10 +4,10 @@ using LogiText.Data;
 using HtmlAgilityPack;
 
 namespace Scraper
-{
-    public class Amazon
+{    
+    public class AmazonScraper : IWebScraper
     {
-        public static string getPage(string url)
+        public string getPage(string url)
         {
             WebClient client = new WebClient();
 
@@ -29,7 +29,7 @@ namespace Scraper
             return r;
         }
 
-        public static string scrapeTitle(string page)
+        public string scrapeTitle(string page)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(page);
@@ -47,7 +47,7 @@ namespace Scraper
             return null;
         }
 
-        public static string scrapeImageLocation(string page)
+        public string scrapeImageLocation(string page)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(page);
@@ -77,14 +77,14 @@ namespace Scraper
             return null;
         }
 
-        public static Book scrapeISBN(string ISBN, string page)
+        public Book getBook(string ISBN, string page)
         {
             Book r = new Book();
 
             r.imgURL = scrapeImageLocation(page);
             r.name = scrapeTitle(page);
-
             r.ISBN = ISBN;
+
             r.price = 22.99f;
 
             return r;

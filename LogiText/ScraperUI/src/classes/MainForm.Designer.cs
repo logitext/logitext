@@ -40,11 +40,24 @@
             this.updateLabel = new System.Windows.Forms.Label();
             this.fIlewwToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.batchScrape = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
+            this.isbnListBox = new System.Windows.Forms.TextBox();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.detailsListBox = new System.Windows.Forms.TextBox();
+            this.executeButton = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.errorListText = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data)).BeginInit();
+            this.tabControl2.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -53,7 +66,7 @@
             this.fIlewwToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(532, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(747, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -134,13 +147,14 @@
             this.progress.Location = new System.Drawing.Point(12, 100);
             this.progress.Name = "progress";
             this.progress.Size = new System.Drawing.Size(508, 26);
+            this.progress.Step = 1;
             this.progress.TabIndex = 4;
             // 
             // updateLabel
             // 
             this.updateLabel.Location = new System.Drawing.Point(9, 129);
             this.updateLabel.Name = "updateLabel";
-            this.updateLabel.Size = new System.Drawing.Size(511, 23);
+            this.updateLabel.Size = new System.Drawing.Size(400, 23);
             this.updateLabel.TabIndex = 5;
             this.updateLabel.Text = "Click search to scrape for an ISBN";
             this.updateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -160,11 +174,113 @@
             this.batchScrape.Text = "Batch Scrape";
             this.batchScrape.Click += new System.EventHandler(this.batchScrape_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(415, 129);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(99, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "More Info >>";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // isbnListBox
+            // 
+            this.isbnListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.isbnListBox.Location = new System.Drawing.Point(3, 3);
+            this.isbnListBox.Multiline = true;
+            this.isbnListBox.Name = "isbnListBox";
+            this.isbnListBox.ReadOnly = true;
+            this.isbnListBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.isbnListBox.Size = new System.Drawing.Size(186, 422);
+            this.isbnListBox.TabIndex = 7;
+            this.isbnListBox.WordWrap = false;
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.tabPage2);
+            this.tabControl2.Controls.Add(this.tabPage3);
+            this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Location = new System.Drawing.Point(535, 27);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(200, 454);
+            this.tabControl2.TabIndex = 8;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.detailsListBox);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(192, 428);
+            this.tabPage2.TabIndex = 0;
+            this.tabPage2.Text = "Details";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.isbnListBox);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(192, 428);
+            this.tabPage3.TabIndex = 1;
+            this.tabPage3.Text = "ISBN List";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // detailsListBox
+            // 
+            this.detailsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.detailsListBox.Location = new System.Drawing.Point(3, 3);
+            this.detailsListBox.Multiline = true;
+            this.detailsListBox.Name = "detailsListBox";
+            this.detailsListBox.ReadOnly = true;
+            this.detailsListBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.detailsListBox.Size = new System.Drawing.Size(186, 422);
+            this.detailsListBox.TabIndex = 8;
+            // 
+            // executeButton
+            // 
+            this.executeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.executeButton.Location = new System.Drawing.Point(535, 487);
+            this.executeButton.Name = "executeButton";
+            this.executeButton.Size = new System.Drawing.Size(200, 42);
+            this.executeButton.TabIndex = 9;
+            this.executeButton.Text = "Execute";
+            this.executeButton.UseVisualStyleBackColor = true;
+            this.executeButton.Click += new System.EventHandler(this.executeButton_Click);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.errorListText);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(192, 428);
+            this.tabPage4.TabIndex = 2;
+            this.tabPage4.Text = "Error List";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // errorListText
+            // 
+            this.errorListText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.errorListText.Location = new System.Drawing.Point(0, 0);
+            this.errorListText.Multiline = true;
+            this.errorListText.Name = "errorListText";
+            this.errorListText.ReadOnly = true;
+            this.errorListText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.errorListText.Size = new System.Drawing.Size(192, 428);
+            this.errorListText.TabIndex = 8;
+            this.errorListText.WordWrap = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 541);
+            this.ClientSize = new System.Drawing.Size(747, 541);
+            this.Controls.Add(this.executeButton);
+            this.Controls.Add(this.tabControl2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.updateLabel);
             this.Controls.Add(this.progress);
             this.Controls.Add(this.openButton);
@@ -183,6 +299,13 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data)).EndInit();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,6 +325,15 @@
         private System.Windows.Forms.Label updateLabel;
         private System.Windows.Forms.ToolStripMenuItem fIlewwToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem batchScrape;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox isbnListBox;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TextBox detailsListBox;
+        private System.Windows.Forms.Button executeButton;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TextBox errorListText;
     }
 }
 
