@@ -47,11 +47,13 @@ namespace ScraperUI
 
             try
             {
-                r.name = (string)row.Cells[0].Value;
-                r.ISBN = (string)row.Cells[1].Value;
-                r.price = (float)row.Cells[2].Value;
-                r.url = (string)row.Cells[3].Value;
-                r.imgURL = (string)row.Cells[4].Value;
+                int i = 0;
+                foreach (string field in Book.fieldNames)
+                {
+                    r.data[field] = (string)row.Cells[i].Value;
+
+                    i++;
+                }
             }
             catch { }
 
@@ -161,18 +163,22 @@ namespace ScraperUI
         private void pushBookToTable(Book book)
         {
             DataGridViewRow row = new DataGridViewRow();
-            row.CreateCells(data,
-                book.name,
-                book.ISBN,
-                book.price,
-                book.url,
-                book.imgURL
-            );
+            row.CreateCells(data);
+
+            int i = 0;
+            foreach (string field in Book.fieldNames)
+            {
+                row.Cells[i].Value = book.data[field];
+
+                i++;
+            }
 
             this.Invoke((MethodInvoker)delegate ()
             {
                 data.Rows.Add(row);
             });
+
+            
         }
 
         private void batchScrape_Click(object sender, EventArgs e)
@@ -203,6 +209,12 @@ namespace ScraperUI
                         }
                     }
                 }
+            }
+
+            if (!moreInfo)
+            {
+                button1_Click(sender, e);
+                tabControl2.SelectedIndex = 1;
             }
         }
 
@@ -238,7 +250,7 @@ namespace ScraperUI
                 string url = "https://www.amazon.com/Clash-Kings-Song-Fire-Book/dp/" + ISBN + "/ref=tmm_hrd_swatch_0?_encoding=UTF8&qid=1559015792&sr=8-2";
                 string page = amazon.getPage(url);
 
-                Book book = amazon.getBook(textBox1.Text, page);
+                Book book = amazon.getBook(ISBN, page);
                 pushBookToTable(book);
             }
             catch (Exception ex)
@@ -288,6 +300,8 @@ namespace ScraperUI
 
                 batch = new Thread(i => { this.scrapeList((List<string>)i); });
                 batch.Start(ISBNs);
+
+                tabControl2.SelectedIndex = 0;
             }
             else
             {

@@ -8,8 +8,12 @@ namespace Scraper
     public interface IWebScraper
     {
         string getPage(string url);
-        string scrapeTitle(string page);
-        string scrapeImageLocation(string page);
+
+        void scrapeTitle(string page, ref Book book);
+        void scrapeImageLocation(string page, ref Book book);
+        void scrapeData(string page, ref Book book);
+        void scrapePrices(string page, string refNumber, ref Book book);
+
         Book getBook(string ISBN, string page);
     }
 }

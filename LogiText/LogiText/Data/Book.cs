@@ -8,27 +8,26 @@ namespace LogiText.Data
     {
         public static string[] fieldNames = {
             "name",
-            "ISBN-10",
-            "ISBN-13",
+            "ISBN10",
+            "ISBN13",
             "ASIN",
             "price",
-            "url",
+            "new-prices",
+            "used-prices",
             "imgURL"
         };
 
-        Dictionary<string, string> data;
+        public Dictionary<string, string> data;
 
         public Book()
         {
             data = new Dictionary<string, string>();
 
             foreach (string field in fieldNames)
-            {
                 data[field] = "";
-            }
         }
 
-        void setField(string fieldname, string value)
+        public void setField(string fieldname, string value)
         {
             data[fieldname] = value;
         }
@@ -39,5 +38,7 @@ namespace LogiText.Data
         public string ASIN   { get => data["ASIN"];   set => setField("ASIN",   value); }
         public string price  { get => data["price"];  set => setField("price",  value); }
         public string imgURL { get => data["imgURL"]; set => setField("imgURL", value); }
+        public string used_prices { get => data["used-prices"]; set => setField("used-prices", value); }
+        public string new_prices  { get => data["new-prices"];  set => setField("new-prices",  value); }
     }
 }
