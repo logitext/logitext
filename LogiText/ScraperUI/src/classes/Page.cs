@@ -69,7 +69,7 @@ namespace ScraperUI.src
             { 
                 Info[] controls = {
                     new Info { title = "Price:", info = "$" + book.price.ToString() },
-                    new Info { title = "ISBN:",  info = book.ISBN.ToString()  },
+                    new Info { title = "ISBN:",  info = book.ISBN10.ToString()  },
                 };
 
                 float size = 18.0f;

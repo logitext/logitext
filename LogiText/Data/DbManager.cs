@@ -4,6 +4,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using MySql.Data.MySqlClient;
+using LogiText.Data;
 
 namespace Data
 {
@@ -197,13 +198,37 @@ namespace Data
             return Query(commandString);
         }
 
-        public DataTable ReadColumns(string tableName)
+        public List<string> ReadColumns(string tableName)
         {
             string commandString = String.Format(@"SELECT COLUMN_NAME 
                                                     FROM INFORMATION_SCHEMA.COLUMNS
                                                     WHERE TABLE_NAME = '{0}';", tableName);
 
-            return Query(commandString);
+            DataTable cols = Query(commandString);
+
+            List<string> colsList = new List<string>();
+
+            foreach (DataRow row in cols.Rows)
+            {
+                foreach (var item in row.ItemArray)
+                {
+                    colsList.Add(item.ToString());
+                }
+            }
+
+            return colsList;
+        }
+
+        public void InsertBook(Book book, string tableName)
+        {
+            List<string> columns = ReadColumns(tableName);
+
+            string sqlStringCols;
+
+            for (int i = 0; i < Book.fieldNames.Length; i++)
+            {
+                if (columns.Contains(Book.fieldNames[i])) ;
+            }
         }
     }
 

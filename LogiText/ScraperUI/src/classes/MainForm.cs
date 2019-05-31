@@ -48,9 +48,9 @@ namespace ScraperUI
             try
             {
                 r.name = (string)row.Cells[0].Value;
-                r.ISBN = (string)row.Cells[1].Value;
-                r.price = (float)row.Cells[2].Value;
-                r.url = (string)row.Cells[3].Value;
+                r.ISBN10 = (string)row.Cells[1].Value;
+                //r.price = (float)row.Cells[2].Value;
+                //r.url = (string)row.Cells[3].Value;
                 r.imgURL = (string)row.Cells[4].Value;
             }
             catch { }
@@ -163,9 +163,9 @@ namespace ScraperUI
             DataGridViewRow row = new DataGridViewRow();
             row.CreateCells(data,
                 book.name,
-                book.ISBN,
+                book.ISBN10,
                 book.price,
-                book.url,
+                book.imgURL,
                 book.imgURL
             );
 

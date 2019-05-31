@@ -25,16 +25,19 @@ namespace POS
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
 
-            string connString = Helper.ConnVal("AzureTestDB");
+            string connString = Helper.ConnVal("AwsTestDB");
 
-            Data.Sql sql = new Data.Sql(connString);
-            DataTable tables = sql.ReadColumns("Test");
+            Data.MySql sql = new Data.MySql(connString);
+            //sql.CreateTable("Test1", "name char(50), ISBN10 char(50), ISBN13 char(50), ASIN char(50), price char(50), imgURL char(255)");
+            //sql.DeleteTable("Test1");
+            DataTable data = sql.ReadColumns("Test1");
             
-            foreach (DataRow dataRow in tables.Rows)
+            
+            foreach (DataRow row in data.Rows)
             {
-                foreach (var item in dataRow.ItemArray)
+                foreach (var item in row.ItemArray)
                 {
-                    Console.Write(item + " ");
+                    Console.Write(item);
                 }
                 Console.Write("\n");
             }

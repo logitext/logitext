@@ -83,9 +83,9 @@ namespace Scraper
 
             r.imgURL = scrapeImageLocation(page);
             r.name = scrapeTitle(page);
-            r.ISBN = ISBN;
+            r.ISBN10 = ISBN;
 
-            r.price = 22.99f;
+            //r.price = 22.99f;
 
             return r;
         }

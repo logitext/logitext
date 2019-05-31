@@ -33,6 +33,8 @@ namespace LogiText.Data
             data[fieldname] = value;
         }
 
+        // Added - JO
+        //public string [] fieldName { get; set; }
         public string name   { get => data["name"];   set => setField("name",   value); }
         public string ISBN10 { get => data["ISBN10"]; set => setField("ISBN10", value); }
         public string ISBN13 { get => data["ISBN13"]; set => setField("ISBN13", value); }
