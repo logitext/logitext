@@ -115,6 +115,11 @@ namespace Scraper
                     }
                 }
             }
+
+            /**/ if (book.ISBN10 == "" && book.ISBN13 != "")
+                book.ISBN10 = IsbnConverter.ConvertTo10(book.ISBN13);
+            else if (book.ISBN13 == "" && book.ISBN10 != "")
+                book.ISBN13 = IsbnConverter.ConvertTo13(book.ISBN10);
         }
 
         public void scrapePrices(string page, string refNumber, ref Book book)
@@ -131,7 +136,7 @@ namespace Scraper
                 {
                     if (!span.HasClass("offer-price")) continue;
 
-                    book.price = span.InnerText;
+                    book.list_price = span.InnerText;
 
                     found = true;
                     break;

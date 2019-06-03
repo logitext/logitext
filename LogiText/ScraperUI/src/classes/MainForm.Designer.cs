@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fIlewwToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -38,17 +39,18 @@
             this.openButton = new System.Windows.Forms.Button();
             this.progress = new System.Windows.Forms.ProgressBar();
             this.updateLabel = new System.Windows.Forms.Label();
-            this.fIlewwToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.batchScrape = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.isbnListBox = new System.Windows.Forms.TextBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.detailsListBox = new System.Windows.Forms.TextBox();
-            this.executeButton = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.errorListText = new System.Windows.Forms.TextBox();
+            this.executeButton = new System.Windows.Forms.Button();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dTADatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.batchScrape = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -69,6 +71,14 @@
             this.menuStrip1.Size = new System.Drawing.Size(747, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fIlewwToolStripMenuItem
+            // 
+            this.fIlewwToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importToolStripMenuItem});
+            this.fIlewwToolStripMenuItem.Name = "fIlewwToolStripMenuItem";
+            this.fIlewwToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fIlewwToolStripMenuItem.Text = "File";
             // 
             // groupBox1
             // 
@@ -130,6 +140,7 @@
             this.data.Name = "data";
             this.data.Size = new System.Drawing.Size(494, 292);
             this.data.TabIndex = 0;
+            this.data.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.data_DoubleClick);
             // 
             // openButton
             // 
@@ -158,21 +169,6 @@
             this.updateLabel.TabIndex = 5;
             this.updateLabel.Text = "Click search to scrape for an ISBN";
             this.updateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // fIlewwToolStripMenuItem
-            // 
-            this.fIlewwToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.batchScrape});
-            this.fIlewwToolStripMenuItem.Name = "fIlewwToolStripMenuItem";
-            this.fIlewwToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fIlewwToolStripMenuItem.Text = "File";
-            // 
-            // batchScrape
-            // 
-            this.batchScrape.Name = "batchScrape";
-            this.batchScrape.Size = new System.Drawing.Size(180, 22);
-            this.batchScrape.Text = "Batch Scrape";
-            this.batchScrape.Click += new System.EventHandler(this.batchScrape_Click);
             // 
             // button1
             // 
@@ -218,17 +214,6 @@
             this.tabPage2.Text = "Details";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.isbnListBox);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(192, 428);
-            this.tabPage3.TabIndex = 1;
-            this.tabPage3.Text = "ISBN List";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
             // detailsListBox
             // 
             this.detailsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -240,16 +225,16 @@
             this.detailsListBox.Size = new System.Drawing.Size(186, 422);
             this.detailsListBox.TabIndex = 8;
             // 
-            // executeButton
+            // tabPage3
             // 
-            this.executeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.executeButton.Location = new System.Drawing.Point(535, 487);
-            this.executeButton.Name = "executeButton";
-            this.executeButton.Size = new System.Drawing.Size(200, 42);
-            this.executeButton.TabIndex = 9;
-            this.executeButton.Text = "Execute";
-            this.executeButton.UseVisualStyleBackColor = true;
-            this.executeButton.Click += new System.EventHandler(this.executeButton_Click);
+            this.tabPage3.Controls.Add(this.isbnListBox);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(192, 428);
+            this.tabPage3.TabIndex = 1;
+            this.tabPage3.Text = "ISBN List";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // tabPage4
             // 
@@ -272,6 +257,40 @@
             this.errorListText.Size = new System.Drawing.Size(192, 428);
             this.errorListText.TabIndex = 8;
             this.errorListText.WordWrap = false;
+            // 
+            // executeButton
+            // 
+            this.executeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.executeButton.Location = new System.Drawing.Point(535, 487);
+            this.executeButton.Name = "executeButton";
+            this.executeButton.Size = new System.Drawing.Size(200, 42);
+            this.executeButton.TabIndex = 9;
+            this.executeButton.Text = "Execute";
+            this.executeButton.UseVisualStyleBackColor = true;
+            this.executeButton.Click += new System.EventHandler(this.executeButton_Click);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dTADatabaseToolStripMenuItem,
+            this.batchScrape});
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importToolStripMenuItem.Text = "Import...";
+            // 
+            // dTADatabaseToolStripMenuItem
+            // 
+            this.dTADatabaseToolStripMenuItem.Name = "dTADatabaseToolStripMenuItem";
+            this.dTADatabaseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dTADatabaseToolStripMenuItem.Text = "DTA Database";
+            this.dTADatabaseToolStripMenuItem.Click += new System.EventHandler(this.dTADatabaseToolStripMenuItem_Click);
+            // 
+            // batchScrape
+            // 
+            this.batchScrape.Name = "batchScrape";
+            this.batchScrape.Size = new System.Drawing.Size(180, 22);
+            this.batchScrape.Text = "ISBN List";
+            this.batchScrape.Click += new System.EventHandler(this.batchScrape_Click_1);
             // 
             // MainForm
             // 
@@ -324,7 +343,6 @@
         private System.Windows.Forms.ProgressBar progress;
         private System.Windows.Forms.Label updateLabel;
         private System.Windows.Forms.ToolStripMenuItem fIlewwToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem batchScrape;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox isbnListBox;
         private System.Windows.Forms.TabControl tabControl2;
@@ -334,6 +352,9 @@
         private System.Windows.Forms.Button executeButton;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TextBox errorListText;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dTADatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem batchScrape;
     }
 }
 

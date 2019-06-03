@@ -50,6 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\classes\Settings.cs" />
+    <Compile Include="src\classes\MainForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\classes\MainForm2.Designer.cs">
+      <DependentUpon>MainForm2.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\classes\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +78,9 @@
     </Compile>
     <EmbeddedResource Include="src\classes\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\classes\MainForm2.resx">
+      <DependentUpon>MainForm2.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\MainForm.datasource" />

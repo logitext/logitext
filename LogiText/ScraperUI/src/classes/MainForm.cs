@@ -178,7 +178,33 @@ namespace ScraperUI
                 data.Rows.Add(row);
             });
 
-            
+
+        }
+
+        private void dTADatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filepath;
+
+            List<Book> books = new List<Book>();
+
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
+            {
+                fileDialog.InitialDirectory = "c:\\";
+                fileDialog.Filter = "DTA Files (*.DTA)|*.DTA";
+                fileDialog.FilterIndex = 2;
+                fileDialog.RestoreDirectory = true;
+
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    filepath = fileDialog.FileName;
+                    books = Parser.readDTA(filepath, 0, 100);
+
+                    for (int i = 0; i < books.Count; i++)
+                        pushBookToTable(books[i]);
+                }
+            }
+
+
         }
 
         private void batchScrape_Click(object sender, EventArgs e)
@@ -195,6 +221,7 @@ namespace ScraperUI
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
                     filepath = fileDialog.FileName;
+
                     var fileStream = fileDialog.OpenFile();
 
                     using (StreamReader reader = new StreamReader(fileStream))
@@ -312,6 +339,16 @@ namespace ScraperUI
                 progress.Maximum = 100;
                 updateLabel.Text = "Click search to scrape for an ISBN";
             }
+        }
+
+        private void data_DoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Clipboard.SetText(data.SelectedCells[0].Value.ToString());
+        }
+
+        private void batchScrape_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

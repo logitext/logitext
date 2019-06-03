@@ -30,3 +30,5 @@ D:\repos\logitext\LogiText\POS\obj\Debug\POS.csproj.CoreCompileInputs.cache
 D:\repos\logitext\LogiText\POS\obj\Debug\POS.csproj.CopyComplete
 D:\repos\logitext\LogiText\POS\obj\Debug\POS.exe
 D:\repos\logitext\LogiText\POS\obj\Debug\POS.pdb
+D:\Repos\logitext\LogiText\POS\bin\Debug\Data.dll
+D:\Repos\logitext\LogiText\POS\bin\Debug\Data.pdb

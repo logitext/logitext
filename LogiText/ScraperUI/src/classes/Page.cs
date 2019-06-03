@@ -62,7 +62,9 @@ namespace ScraperUI.src
                 };
 
                 p.SizeMode = PictureBoxSizeMode.StretchImage;
-                p.Load(book.imgURL);
+
+                if (book.imgURL != "")
+                    p.Load(book.imgURL);
             }
 
             // Label Information
