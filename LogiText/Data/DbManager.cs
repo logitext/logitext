@@ -379,10 +379,8 @@ namespace Data
 
                         foreach (DataRow row in tables.Rows)
                         {
-                            foreach (var item in row.ItemArray)
-                            {
-                                tableList.Add(item.ToString());
-                            }
+                            string tablename = (string)row[2];
+                            tableList.Add(tablename);
                         }
 
                         return tableList;
