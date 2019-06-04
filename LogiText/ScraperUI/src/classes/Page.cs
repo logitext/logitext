@@ -68,23 +68,23 @@ namespace ScraperUI.src
             }
 
             // Label Information
-<<<<<<< HEAD
-            { 
-                Info[] controls = {
-                    new Info { title = "Price:", info = "$" + book.price.ToString() },
-                    new Info { title = "ISBN:",  info = book.ISBN10.ToString()  },
-                };
-=======
-            {
-                Info[] controls = new Info[Book.fieldNames.Length];
-
-                int it = 0;
-                foreach (string field in Book.fieldNames)
-                {
-                    controls[it] = new Info { title = field + ":", info = book.data[field] };
-                    it++;
-                }
->>>>>>> master
+//<<<<<<< HEAD
+//            { 
+//                Info[] controls = {
+//                    new Info { title = "Price:", info = "$" + book.price.ToString() },
+//                    new Info { title = "ISBN:",  info = book.ISBN10.ToString()  },
+//                };
+//=======
+//            {
+//                Info[] controls = new Info[Book.fieldNames.Length];
+//
+//                int it = 0;
+//                foreach (string field in Book.fieldNames)
+//                {
+//                    controls[it] = new Info { title = field + ":", info = book.data[field] };
+//                    it++;
+//                }
+//>>>>>>> master
 
                 float size = 18.0f;
                 const float padding = 1.0f;

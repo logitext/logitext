@@ -43,13 +43,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.database_info_panel = new System.Windows.Forms.Panel();
-            this.dataLabel = new System.Windows.Forms.Label();
-            this.infoLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tableBox = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.connectButton = new System.Windows.Forms.Button();
+            this.databases = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -63,6 +59,11 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.thread_checker = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.dataLabel = new System.Windows.Forms.Label();
+            this.infoLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tableBox = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -80,6 +81,10 @@
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -227,10 +232,7 @@
             // 
             // database_info_panel
             // 
-            this.database_info_panel.Controls.Add(this.dataLabel);
-            this.database_info_panel.Controls.Add(this.infoLabel);
-            this.database_info_panel.Controls.Add(this.label1);
-            this.database_info_panel.Controls.Add(this.tableBox);
+            this.database_info_panel.Controls.Add(this.splitContainer2);
             this.database_info_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.database_info_panel.Enabled = false;
             this.database_info_panel.Location = new System.Drawing.Point(3, 16);
@@ -238,71 +240,40 @@
             this.database_info_panel.Size = new System.Drawing.Size(237, 214);
             this.database_info_panel.TabIndex = 0;
             // 
-            // dataLabel
-            // 
-            this.dataLabel.Location = new System.Drawing.Point(129, 96);
-            this.dataLabel.Name = "dataLabel";
-            this.dataLabel.Size = new System.Drawing.Size(158, 14);
-            this.dataLabel.TabIndex = 4;
-            this.dataLabel.Text = "data";
-            // 
-            // infoLabel
-            // 
-            this.infoLabel.Location = new System.Drawing.Point(3, 96);
-            this.infoLabel.Name = "infoLabel";
-            this.infoLabel.Size = new System.Drawing.Size(120, 14);
-            this.infoLabel.TabIndex = 3;
-            this.infoLabel.Text = "info";
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(3, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(284, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Tables:";
-            // 
-            // tableBox
-            // 
-            this.tableBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableBox.FormattingEnabled = true;
-            this.tableBox.Location = new System.Drawing.Point(3, 26);
-            this.tableBox.Name = "tableBox";
-            this.tableBox.Size = new System.Drawing.Size(231, 56);
-            this.tableBox.TabIndex = 1;
-            // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.comboBox1);
+            this.panel2.Controls.Add(this.connectButton);
+            this.panel2.Controls.Add(this.databases);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(3, 16);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(243, 33);
             this.panel2.TabIndex = 0;
             // 
-            // button1
+            // connectButton
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.connectButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.connectButton.BackColor = System.Drawing.Color.Green;
+            this.connectButton.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.connectButton.Location = new System.Drawing.Point(157, 5);
+            this.connectButton.Name = "connectButton";
+            this.connectButton.Size = new System.Drawing.Size(80, 22);
+            this.connectButton.TabIndex = 3;
+            this.connectButton.Text = "Connect";
+            this.connectButton.UseVisualStyleBackColor = false;
+            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
+            // 
+            // databases
+            // 
+            this.databases.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(157, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 22);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Connect";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "MySql",
-            "Azure"});
-            this.comboBox1.Location = new System.Drawing.Point(3, 6);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(148, 21);
-            this.comboBox1.TabIndex = 2;
+            this.databases.FormattingEnabled = true;
+            this.databases.Items.AddRange(new object[] {
+            "MySql"});
+            this.databases.Location = new System.Drawing.Point(3, 6);
+            this.databases.Name = "databases";
+            this.databases.Size = new System.Drawing.Size(148, 21);
+            this.databases.TabIndex = 2;
             // 
             // groupBox3
             // 
@@ -321,7 +292,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(808, 318);
+            this.tabPage2.Size = new System.Drawing.Size(708, 291);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "File Preview";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -332,7 +303,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 37);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(802, 278);
+            this.panel3.Size = new System.Drawing.Size(702, 251);
             this.panel3.TabIndex = 3;
             // 
             // previewBox
@@ -344,7 +315,7 @@
             this.previewBox.Name = "previewBox";
             this.previewBox.ReadOnly = true;
             this.previewBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.previewBox.Size = new System.Drawing.Size(802, 278);
+            this.previewBox.Size = new System.Drawing.Size(702, 251);
             this.previewBox.TabIndex = 4;
             this.previewBox.WordWrap = false;
             // 
@@ -355,7 +326,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(802, 34);
+            this.panel4.Size = new System.Drawing.Size(702, 34);
             this.panel4.TabIndex = 4;
             // 
             // clearButton
@@ -425,6 +396,61 @@
             this.timer1.Interval = 2000;
             this.timer1.Tick += new System.EventHandler(this.thread_checker_Tick);
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.label1);
+            this.splitContainer2.Panel1.Controls.Add(this.tableBox);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.dataLabel);
+            this.splitContainer2.Panel2.Controls.Add(this.infoLabel);
+            this.splitContainer2.Size = new System.Drawing.Size(237, 214);
+            this.splitContainer2.SplitterDistance = 79;
+            this.splitContainer2.TabIndex = 0;
+            // 
+            // dataLabel
+            // 
+            this.dataLabel.Location = new System.Drawing.Point(110, 9);
+            this.dataLabel.Name = "dataLabel";
+            this.dataLabel.Size = new System.Drawing.Size(124, 14);
+            this.dataLabel.TabIndex = 8;
+            this.dataLabel.Text = "data";
+            // 
+            // infoLabel
+            // 
+            this.infoLabel.Location = new System.Drawing.Point(6, 9);
+            this.infoLabel.Name = "infoLabel";
+            this.infoLabel.Size = new System.Drawing.Size(98, 14);
+            this.infoLabel.TabIndex = 7;
+            this.infoLabel.Text = "info";
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(6, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(228, 15);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Tables:";
+            // 
+            // tableBox
+            // 
+            this.tableBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableBox.FormattingEnabled = true;
+            this.tableBox.Location = new System.Drawing.Point(4, 20);
+            this.tableBox.Name = "tableBox";
+            this.tableBox.Size = new System.Drawing.Size(228, 56);
+            this.tableBox.TabIndex = 7;
+            // 
             // MainForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -457,6 +483,10 @@
             this.panel4.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -486,17 +516,18 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox databases;
         private System.Windows.Forms.Panel database_info_panel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox tableBox;
-        private System.Windows.Forms.Label infoLabel;
-        private System.Windows.Forms.Label dataLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox previewBox;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button previewButton;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox tableBox;
+        private System.Windows.Forms.Label dataLabel;
+        private System.Windows.Forms.Label infoLabel;
     }
 }

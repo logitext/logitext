@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Data;
 using ScraperUI.src;
 using System.Threading;
 
@@ -16,6 +17,8 @@ namespace ScraperUI.src.classes
 {
     public partial class MainForm2 : Form
     {
+        private Data.MySql database = null;
+
         private string workingDirectory;
         private string projectDirectory;
 
@@ -36,6 +39,11 @@ namespace ScraperUI.src.classes
             workingDirectory = (Environment.CurrentDirectory).Replace('\\', '/');
             projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName.Replace('\\', '/');
 
+            resetInfo();
+        }
+
+        private void resetInfo()
+        {
             DatabaseInfo = new Dictionary<string, string> {
                 { "Total Row Count:", "0" },
                 { "Table Count:", "0" }
@@ -230,6 +238,73 @@ namespace ScraperUI.src.classes
         {
             threads.Add(new Thread(this.checkThreads));
             threads[threads.Count - 1].Start();
+        }
+
+        private void connectToMySQL()
+        {
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                databases.Enabled = false;
+                connectButton.Text = "Connecting";
+                connectButton.BackColor = Color.Yellow;
+            });
+
+            database = new Data.MySql("user id=master;password=Ortner-0210;server=sqltest.ct7pcrou5asi.us-east-2.rds.amazonaws.com;database=MySqlTest");
+
+            if (!database.connSuccessful)
+            {
+                this.Invoke((MethodInvoker)delegate ()
+                {
+                    connectButton.Text = "Connect";
+                    connectButton.BackColor = Color.Green;
+
+                    databases.Enabled = true;
+                    showError("Error connecting to database");
+                    return;
+                });
+            }
+            else
+            {
+                this.Invoke((MethodInvoker)delegate ()
+                {
+                    database_info_panel.Enabled = true;
+
+                    connectButton.Text = "Disconnect";
+                    connectButton.BackColor = Color.Red;
+
+                    tableBox.Items.Clear();
+
+                    // Update tables
+                    List<string> tables = database.ListTables();
+                    foreach (string table in tables)
+                        tableBox.Items.Add(table);
+                });
+            }
+
+        }
+
+        private void connectButton_Click(object sender, EventArgs e)
+        {
+            if (databases.SelectedItem != null && databases.SelectedItem.ToString() == "MySql")
+            {
+                if (connectButton.Text == "Connect")
+                {
+                    threads.Add(new Thread(this.connectToMySQL));
+                    threads[threads.Count - 1].Start();
+                }
+                else
+                {
+                    database = null;
+
+                    database_info_panel.Enabled = false;
+                    tableBox.Items.Clear();
+                    resetInfo();
+
+                    databases.Enabled = true;
+                    connectButton.Text = "Connect";
+                    connectButton.BackColor = Color.Green;
+                }
+            }
         }
     }
 }
