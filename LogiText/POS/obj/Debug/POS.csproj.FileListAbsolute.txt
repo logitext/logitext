@@ -30,5 +30,15 @@ D:\repos\logitext\LogiText\POS\obj\Debug\POS.csproj.CoreCompileInputs.cache
 D:\repos\logitext\LogiText\POS\obj\Debug\POS.csproj.CopyComplete
 D:\repos\logitext\LogiText\POS\obj\Debug\POS.exe
 D:\repos\logitext\LogiText\POS\obj\Debug\POS.pdb
+<<<<<<< HEAD
 D:\Repos\logitext\LogiText\POS\bin\Debug\Data.dll
 D:\Repos\logitext\LogiText\POS\bin\Debug\Data.pdb
+=======
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\Data.dll
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\Data.pdb
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\MySql.Data.dll
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\Google.Protobuf.dll
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\MySql.Data.xml
+C:\Users\Lab Works\Desktop\logitext\code_repo\logitext\LogiText\POS\bin\Debug\Google.Protobuf.xml
+>>>>>>> master

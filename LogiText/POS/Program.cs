@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Data;
+using MySql.Data.MySqlClient;
+using LogiText.Data;
 
 /*
 .NET Framework 4.7.2
@@ -22,14 +26,21 @@ namespace POS
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
 
-            string connStr = Helper.ConnVal("TestDB");
-            Data.Connector connection = new Data.Connector(Helper.ConnVal("TestDB"));
-            Data.SqlManager dB = new Data.SqlManager(connection);
-            dB.DeleteTable("Test");
+            string connString = Helper.ConnVal("AwsTestDB");
 
             /*
-            | ----- CREATE BOOK CLASS FOR QUERYING AND INSERTING ----- |
+            bookTest.name = "test";
+            bookTest.ISBN10 = "0000000000";
+            bookTest.ISBN13 = "9870000000";
+            bookTest.ASIN = "00000";
+            bookTest.price = "9.99";
+            bookTest.imgURL = "https://test.com";
+            bookTest.used_prices = "10";
+            bookTest.new_prices = "12";
             */
+
+            //Data.MySql sql = new Data.MySql(connString);
+
         }
     }
 }
