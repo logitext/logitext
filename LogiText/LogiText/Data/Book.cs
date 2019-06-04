@@ -11,9 +11,9 @@ namespace LogiText.Data
             "ISBN10",
             "ISBN13",
             "ASIN",
+            "new_prices",
+            "used_prices",
             "price",
-            "new-prices",
-            "used-prices",
             "imgURL"
         };
 
@@ -32,15 +32,13 @@ namespace LogiText.Data
             data[fieldname] = value;
         }
 
-        // Added - JO
-        //public string [] fieldName { get; set; }
         public string name   { get => data["name"];   set => setField("name",   value); }
         public string ISBN10 { get => data["ISBN10"]; set => setField("ISBN10", value); }
         public string ISBN13 { get => data["ISBN13"]; set => setField("ISBN13", value); }
         public string ASIN   { get => data["ASIN"];   set => setField("ASIN",   value); }
         public string price  { get => data["price"];  set => setField("price",  value); }
         public string imgURL { get => data["imgURL"]; set => setField("imgURL", value); }
-        public string used_prices { get => data["used-prices"]; set => setField("used-prices", value); }
-        public string new_prices  { get => data["new-prices"];  set => setField("new-prices",  value); }
+        public string used_prices { get => data["used_prices"]; set => setField("used_prices", value); }
+        public string new_prices  { get => data["new_prices"];  set => setField("new_prices",  value); }
     }
 }
