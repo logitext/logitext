@@ -134,7 +134,7 @@ namespace ScraperUI.src.classes
                 {
                     filepath = fileDialog.FileName;
 
-                    if (!supported_types.Contains(filepath.Split('.')[filepath.Split('.').Length - 1]))
+                    if (!supported_types.Contains(filepath.Split('.')[filepath.Split('.').Length - 1].ToLower()))
                     {
                         fileList.Items.Add(filepath).BackColor = Color.OrangeRed;
                     }
