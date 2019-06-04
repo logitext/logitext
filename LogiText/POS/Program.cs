@@ -39,8 +39,12 @@ namespace POS
             bookTest.new_prices = "12";
             */
 
-            //Data.MySql sql = new Data.MySql(connString);
-
+            Data.MySql sql = new Data.MySql(connString);
+            List<string> tables = sql.ListTables();
+            foreach (string t in tables)
+            {
+                Console.WriteLine(t);
+            }
         }
     }
 }
