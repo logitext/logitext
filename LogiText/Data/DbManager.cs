@@ -64,9 +64,9 @@ namespace Data
             }
         }
 
-        public DataTable ReadAll(string tableName, string columns)
+        public DataTable ReadAll(string tableName, int limit = 0, string columns = "*")
         {
-            string commandString = String.Format(queryStrings["selectAll"], columns, tableName);
+            string commandString = String.Format(queryStrings["selectAll"], columns, tableName, limit.ToString());
 
             return Query(commandString);
         }
@@ -221,11 +221,17 @@ namespace Data
 
                 Book newBook = new Book();
 
-                foreach (string dataField in Book.fieldNames)
+                List<string> columns = ColumnNames(tableName);
+                List<string> fieldNames = new List<string>(Book.fieldNames);
+
+                foreach (string column in columns)
                 {
-                    DataTable data = ReadWhere(tableName, field, identifier, dataField);
-                    string value = data.Rows[0][0].ToString();
-                    newBook.data[dataField] = value;
+                    if (fieldNames.Contains(column))
+                    {
+                        DataTable data = ReadWhere(tableName, field, identifier, column);
+                        string value = data.Rows[0][0].ToString();
+                        newBook.data[column] = value;
+                    }
                 }
 
                 return newBook;
@@ -281,8 +287,8 @@ namespace Data
             {
                 ["drop"] = "DROP TABLE IF EXISTS {0};",
                 ["create"] = "CREATE TABLE IF NOT EXISTS {0} ({1});",
-                ["insert"] = "if not exists (SELECT * FROM) INSERT INTO {0} ({1}) VALUES ({2});",
-                ["selectAll"] = "SELECT {0} FROM {1};",
+                ["insert"] = "INSERT INTO {0} ({1}) VALUES ({2});",
+                ["selectAll"] = "SELECT {0} FROM {1} LIMIT 0, {2};",
                 ["selectWhere"] = "SELECT {0} FROM {1} WHERE {2} = {3};",
                 ["columnNames"] = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{0}';",
                 ["columnInfo"] = "SELECT COLUMN_NAME, COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{0}';",
@@ -435,8 +441,12 @@ namespace Data
                 ["drop"] = "DROP TABLE IF EXISTS {0};",
                 ["create"] = "CREATE TABLE IF NOT EXISTS {0} ({1});",
                 ["insert"] = "INSERT INTO {0} ({1}) VALUES ({2});",
-                ["select"] = "SELECT {0} FROM {1};",
-                ["listCols"] = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{0}';"
+                ["selectAll"] = "SELECT {0} FROM {1};",
+                ["selectWhere"] = "SELECT {0} FROM {1} WHERE {2} = {3};",
+                ["columnNames"] = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{0}';",
+                ["columnInfo"] = "SELECT COLUMN_NAME, COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{0}';",
+                ["exists"] = "SELECT * FROM {1} WHERE {2} = {3};",
+                ["count"] = "SELECT COUNT(*) FROM {0};"
             };
         }
 
@@ -526,10 +536,8 @@ namespace Data
 
                         foreach (DataRow row in tables.Rows)
                         {
-                            foreach (var item in row.ItemArray)
-                            {
-                                tableList.Add(item.ToString());
-                            }
+                            string tablename = (string)row[2];
+                            tableList.Add(tablename);
                         }
 
                         return tableList;
