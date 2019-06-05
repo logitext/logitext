@@ -64,6 +64,20 @@ namespace Data
             }
         }
 
+        public bool InsertMultipleRecords(string tableName, string columns, string data)
+        {
+            string commandString = String.Format(queryStrings["insertMultiple"], tableName, columns, data);
+
+            if (NonQuery(commandString))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public DataTable ReadAll(string tableName, int limit = 0, string columns = "*")
         {
             string commandString = String.Format(queryStrings["selectAll"], columns, tableName, limit.ToString());
@@ -130,6 +144,55 @@ namespace Data
             return colsList;
         }
 
+        /*
+        NOTE: THERE MIGHT BE A BETTER WAY TO DO THIS 
+              SPLIT COLUMN STRING AND BOOK STRING INTO SEPARATE FUNCTIONS
+        */
+        public List<string> CreateSqlStrings(Book book, List<string> columns)
+        {
+            // Returns a list containing sql strings for values and columns 
+            // The value string is the first item in the list
+            string sqlStringCols = "";
+            string sqlStringVal = "";
+
+            List<string> sqlStrings = new List<string>();
+
+            for (int i = 0; i < Book.fieldNames.Length; i++)
+            {
+                string field = Book.fieldNames[i];
+                string value = book.data[field];
+
+                int nameIndex = columns.FindIndex(a => a.Contains(field));
+
+                // Returns false if the field name is not in column list
+                if (nameIndex == -1)
+                {
+                    Console.WriteLine("{0} does not match column schema", book.ISBN13);
+                    return sqlStrings;
+                }
+                else
+                {
+                    int typeIndex = nameIndex + 1;
+
+                    string colString = String.Format("{0}", field);
+                    string valString = String.Format("'{0}'", value);
+
+                    if (i != Book.fieldNames.Length - 1)
+                    {
+                        colString += ", ";
+                        valString += ", ";
+                    }
+
+                    sqlStringCols += colString;
+                    sqlStringVal += valString;
+                }
+            }
+
+            sqlStrings.Add(sqlStringVal);
+            sqlStrings.Add(sqlStringCols);
+            return sqlStrings;
+        }
+
         public bool InsertBook(Book book, string tableName)
         {
             List<string> columns = ColumnInfo(tableName);
@@ -146,43 +209,78 @@ namespace Data
             }
             else
             {
-                string sqlStringCols = "";
-                string sqlStringVal = "";
+                List<string> sqlStrings = CreateSqlStrings(book, columns);
 
-                for (int i = 0; i < Book.fieldNames.Length; i++)
+                if (sqlStrings.Count != 0)
                 {
-                    string field = Book.fieldNames[i];
-                    string value = book.data[field];
+                    string sqlStringVal = sqlStrings[0];
+                    string sqlStringCols = sqlStrings[1];
 
-                    int nameIndex = columns.FindIndex(a => a.Contains(field));
-
-                    // Returns false if the field name is not in column list
-                    if (nameIndex == -1)
+                    try
                     {
-                        Console.WriteLine("{0} does not match column schema", book.ISBN13);
+                        InsertRecord(tableName, sqlStringCols, sqlStringVal);
+                        return true;
+                    }
+                    catch
+                    {
                         return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }                
+            }
+        }
+        
+        public bool InsertBookList(List<Book> bookList, string tableName)
+        {
+            List<string> columns = ColumnInfo(tableName);
+
+            string finalValueString = "";
+            string columnString = "";
+
+            //foreach (Book book in bookList)
+            for (int i = 0; i < bookList.Count; i++)
+            {
+                Book book = bookList[i];
+
+                if (! BookInTable(book, tableName))
+                {
+                    
+                    List<string> sqlStrings = CreateSqlStrings(book, columns);
+
+                    if (sqlStrings.Count != 0)
+                    {
+                        string valueString = String.Format("({0})", sqlStrings[0]);
+                        columnString = sqlStrings[1];
+
+                        if (i != bookList.Count - 1)
+                        {
+                            valueString += ", ";
+                        }
+
+                        finalValueString += valueString;
                     }
                     else
                     {
-                        int typeIndex = nameIndex + 1;
-
-                        string colString = String.Format("{0}", field);
-                        string valString = String.Format("'{0}'", value);
-
-                        if (i != Book.fieldNames.Length - 1)
-                        {
-                            colString += ", ";
-                            valString += ", ";
-                        }
-
-                        sqlStringCols += colString;
-                        sqlStringVal += valString;
+                        // Book Class Schema doesn't match table
+                        return false;
                     }
                 }
+            }
 
+            if (finalValueString == "")
+            {
+                // DUPLICATE ISSUE
+                Console.WriteLine("All books are already in database");
+                return false;
+            }
+            else
+            {
                 try
                 {
-                    InsertRecord(tableName, sqlStringCols, sqlStringVal);
+                    InsertMultipleRecords(tableName, columnString, finalValueString);
                     return true;
                 }
                 catch
@@ -191,7 +289,7 @@ namespace Data
                 }
             }
         }
-
+        
         public bool BookInTable(Book book, string tableName)
         {
             string field = "ISBN13";
@@ -288,6 +386,7 @@ namespace Data
                 ["drop"] = "DROP TABLE IF EXISTS {0};",
                 ["create"] = "CREATE TABLE IF NOT EXISTS {0} ({1});",
                 ["insert"] = "INSERT INTO {0} ({1}) VALUES ({2});",
+                ["insertMultiple"] = "INSERT INTO {0} ({1}) VALUES {2};",
                 ["selectAll"] = "SELECT {0} FROM {1} LIMIT 0, {2};",
                 ["selectWhere"] = "SELECT {0} FROM {1} WHERE {2} = {3};",
                 ["columnNames"] = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{0}';",
