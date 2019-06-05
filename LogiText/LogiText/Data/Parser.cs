@@ -103,12 +103,13 @@ namespace LogiText.Data
         public List<Book> read(int first_index, int last_index)
         {
             List<Book> books = new List<Book>();
+            stream.Position = 0;
             reader = new StreamReader(stream);
 
             for (int i = 0; i < last_index; i++)
             {
                 string line = reader.ReadLine();
-                if (i < first_index) continue;
+                if (i < first_index || i == 0) continue;
 
                 books.Add(processLine(line));
             }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using LogiText.Data;
 using Data;
 using ScraperUI.src;
 using System.Threading;
@@ -595,7 +596,24 @@ namespace ScraperUI.src.classes
 
         private void insertionWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            for (int i = 0; i < 100; i++)
+            string filename = "";
+            int file_lines = 0;
+
+            int increment = 50;
+            int lines = 50;
+
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                filename = fileList.SelectedItems[0].Text;
+                file_lines = File.ReadLines(filename).Count();
+                progressBar1.Maximum = file_lines;
+                toolStripProgressBar1.Maximum = file_lines;
+            });
+
+            DTAreader reader = new DTAreader(filename);
+
+            int i = 0;
+            while (i < lines && i < file_lines)
             {
                 if (insertionWorker.CancellationPending)
                 {
@@ -604,8 +622,11 @@ namespace ScraperUI.src.classes
                     return;
                 }
 
-                Thread.Sleep(100);
+                List<Book> books = reader.read(i, i + increment);
+
                 insertionWorker.ReportProgress(i);
+
+                i += increment;
             }
         }
 
