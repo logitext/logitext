@@ -88,6 +88,30 @@ namespace ScraperUI.src.classes
             genInfoLabels();
         }
 
+        private void updateInfoLabels()
+        {
+            foreach (KeyValuePair<string, string> stat in DatabaseInfo)
+            { 
+                foreach (Control control in dataPanel.Controls)
+                {
+                    if (control.Name == stat.Key)
+                    {
+                        int number;
+                        if (Int32.TryParse(stat.Value, out number))
+                        {
+                            control.Text = formatNumber(number);
+                        }
+                        else
+                        {
+                            control.Text = stat.Value;
+                        }
+
+                        break;
+                    }
+                }
+            }
+        }
+
         private void genInfoLabels()
         {
             infoLabel.Visible = false;
@@ -107,6 +131,7 @@ namespace ScraperUI.src.classes
 
                 Label data = new Label()
                 {
+                    Name = stat.Key,
                     AutoSize = false,
                     Size = dataLabel.Size,
                     Parent = dataLabel.Parent,
@@ -217,7 +242,7 @@ namespace ScraperUI.src.classes
                 showError("Must select file to read!");
                 return;
             }
-
+            
             threads.Add(new Thread(i => { this.previewFile((string)i); }));
             threads[threads.Count - 1].Start((fileList.SelectedItems[0].Text));
         }
@@ -244,6 +269,7 @@ namespace ScraperUI.src.classes
         {
             this.Invoke((MethodInvoker)delegate ()
             {
+                statusLabel.Text = "Connecting to SQL Database...";
                 databases.Enabled = false;
                 connectButton.Text = "Connecting";
                 connectButton.BackColor = Color.Yellow;
@@ -260,6 +286,7 @@ namespace ScraperUI.src.classes
 
                     databases.Enabled = true;
                     showError("Error connecting to database");
+                    statusLabel.Text = "Ready";
                     return;
                 });
             }
@@ -278,9 +305,18 @@ namespace ScraperUI.src.classes
                     List<string> tables = database.ListTables();
                     foreach (string table in tables)
                         tableBox.Items.Add(table);
+
+                    int rowCount = 0;
+                    foreach (string table in tables)
+                        rowCount += database.RowCount(table);
+
+                    this.DatabaseInfo["Total Row Count:"] = rowCount.ToString();
+                    this.DatabaseInfo["Table Count:"] = tables.Count.ToString();
+                    updateInfoLabels();
                 });
             }
 
+            statusLabel.Text = "Ready";
         }
 
         private void connectButton_Click(object sender, EventArgs e)
@@ -298,12 +334,43 @@ namespace ScraperUI.src.classes
 
                     database_info_panel.Enabled = false;
                     tableBox.Items.Clear();
+
                     resetInfo();
+                    updateInfoLabels();
 
                     databases.Enabled = true;
                     connectButton.Text = "Connect";
                     connectButton.BackColor = Color.Green;
                 }
+            }
+        }
+
+        private void previewTable(string tablename)
+        {
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                viewingLabel.Text = "Previewing " + tablename;
+                tablePreview.Columns.Clear();
+            });
+
+            foreach (string column in database.ColumnNames(tablename))
+                this.Invoke((MethodInvoker)delegate ()
+                {
+                    tablePreview.Columns.Add(column, column);
+                });
+            
+        }
+
+        private void tableBox_DoubleClick(object sender, MouseEventArgs e)
+        {
+            int index = tableBox.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches)
+            {
+                string tableName = tableBox.Items[index].ToString();
+                databaseControl.SelectedIndex = 1;
+
+                threads.Add(new Thread(i => this.previewTable((string)i)));
+                threads[threads.Count - 1].Start(tableName);
             }
         }
     }
