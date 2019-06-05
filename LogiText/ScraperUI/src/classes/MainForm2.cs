@@ -79,13 +79,25 @@ namespace ScraperUI.src.classes
             fileList.View = View.Details;
             fileList.HeaderStyle = ColumnHeaderStyle.None;
             fileList.FullRowSelect = true;
-            fileList.Columns.Add("", -2);
+            fileList.Columns.Add("Name", 400);
+            fileList.Columns.Add("Size", 500);
+
+            fileColumns.View = View.Details;
+            fileColumns.HeaderStyle = ColumnHeaderStyle.None;
+            fileColumns.FullRowSelect = true;
+            fileColumns.Columns.Add("Name", -2);
+
+            tableColumns.View = View.Details;
+            tableColumns.HeaderStyle = ColumnHeaderStyle.None;
+            tableColumns.FullRowSelect = true;
+            tableColumns.Columns.Add("Name", -2);
 
             previewBox.Text = "Select file to preview...";
 
             checkThreads();
 
             genInfoLabels();
+
         }
 
         private void updateInfoLabels()
@@ -166,15 +178,21 @@ namespace ScraperUI.src.classes
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
                     filepath = fileDialog.FileName;
+                    FileInfo info = new FileInfo(filepath);
+                    int file_size = (int)((float)info.Length / 1000.0f);
+
+                    string[] row = { filepath, formatNumber(file_size) + " KB" };
+                    ListViewItem item = new ListViewItem(row);
 
                     if (!supported_types.Contains(filepath.Split('.')[filepath.Split('.').Length - 1].ToLower()))
                     {
-                        fileList.Items.Add(filepath).BackColor = Color.OrangeRed;
+                        fileList.Items.Add(item).BackColor = Color.OrangeRed;
                     }
                     else
                     {
-                        fileList.Items.Add(filepath);
+                        fileList.Items.Add(item);
                     }
+
                 }
             }
         }
@@ -265,6 +283,31 @@ namespace ScraperUI.src.classes
             threads[threads.Count - 1].Start();
         }
 
+        private void updateDatabasePanel()
+        {
+            if (fileList.SelectedItems.Count != 0) insertionBox.Enabled = true;
+
+            database_info_panel.Enabled = true;
+
+            connectButton.Text = "Disconnect";
+            connectButton.BackColor = Color.Red;
+
+            tableBox.Items.Clear();
+
+            // Update tables
+            List<string> tables = database.ListTables();
+            foreach (string table in tables)
+                tableBox.Items.Add(table);
+
+            int rowCount = 0;
+            foreach (string table in tables)
+                rowCount += database.RowCount(table);
+
+            this.DatabaseInfo["Total Row Count:"] = rowCount.ToString();
+            this.DatabaseInfo["Table Count:"] = tables.Count.ToString();
+            updateInfoLabels();
+        }
+
         private void connectToMySQL()
         {
             this.Invoke((MethodInvoker)delegate ()
@@ -294,25 +337,7 @@ namespace ScraperUI.src.classes
             {
                 this.Invoke((MethodInvoker)delegate ()
                 {
-                    database_info_panel.Enabled = true;
-
-                    connectButton.Text = "Disconnect";
-                    connectButton.BackColor = Color.Red;
-
-                    tableBox.Items.Clear();
-
-                    // Update tables
-                    List<string> tables = database.ListTables();
-                    foreach (string table in tables)
-                        tableBox.Items.Add(table);
-
-                    int rowCount = 0;
-                    foreach (string table in tables)
-                        rowCount += database.RowCount(table);
-
-                    this.DatabaseInfo["Total Row Count:"] = rowCount.ToString();
-                    this.DatabaseInfo["Table Count:"] = tables.Count.ToString();
-                    updateInfoLabels();
+                    updateDatabasePanel();
                 });
             }
 
@@ -332,6 +357,7 @@ namespace ScraperUI.src.classes
                 {
                     database = null;
 
+                    insertionBox.Enabled = false;
                     database_info_panel.Enabled = false;
                     tableBox.Items.Clear();
 
@@ -341,6 +367,13 @@ namespace ScraperUI.src.classes
                     databases.Enabled = true;
                     connectButton.Text = "Connect";
                     connectButton.BackColor = Color.Green;
+
+                    viewingLabel.Text = "No Table Selected";
+                    tablePreview.Columns.Clear();
+                    tablePreview.Rows.Clear();
+
+                    fileColumns.Items.Clear();
+                    tableColumns.Items.Clear();
                 }
             }
         }
@@ -353,12 +386,29 @@ namespace ScraperUI.src.classes
                 tablePreview.Columns.Clear();
             });
 
-            foreach (string column in database.ColumnNames(tablename))
+            List<string> columns = database.ColumnNames(tablename);
+            foreach (string column in columns)
                 this.Invoke((MethodInvoker)delegate ()
                 {
                     tablePreview.Columns.Add(column, column);
                 });
-            
+
+            DataTable rows = database.ReadAll(tablename, 10);
+            foreach (DataRow row in rows.Rows)
+            {
+                DataGridViewRow dataRow = new DataGridViewRow();
+                dataRow.CreateCells(tablePreview);
+
+                for (int i = 0; i < columns.Count; i++)
+                {
+                    dataRow.Cells[i].Value = row[i].ToString();
+                }
+
+                this.Invoke((MethodInvoker)delegate ()
+                {
+                    tablePreview.Rows.Add(dataRow);
+                });
+            }
         }
 
         private void tableBox_DoubleClick(object sender, MouseEventArgs e)
@@ -372,6 +422,207 @@ namespace ScraperUI.src.classes
                 threads.Add(new Thread(i => this.previewTable((string)i)));
                 threads[threads.Count - 1].Start(tableName);
             }
+        }
+
+        private void createTableButton_Click(object sender, EventArgs e)
+        {
+            string tablename = Prompt.ShowDialog("Table Name:", "Create Table");
+            DialogResult yesOrNo = MessageBox.Show("Are you sure you want to create a table called " + tablename + "?", "Are you sure?", MessageBoxButtons.YesNo);
+
+            if (yesOrNo == DialogResult.Yes)
+            {
+                string columns = Prompt.ShowDialog("Insert the column names as a comma delimited list:", "Create Table");
+
+                if (columns != "")
+                {
+                    database.CreateTable(tablename, columns);
+                    updateDatabasePanel();
+                }
+            }
+        }
+
+        private void deleteTableButton_Click(object sender, EventArgs e)
+        {
+            /**/ if (tableBox.SelectedItems.Count == 0) { showError("You must select a table to delete!"); return; }
+            else if (tableBox.SelectedItems.Count  > 1) { showError("You must delete one table at a time!"); return; }
+
+            DialogResult yesOrNo = MessageBox.Show("Are you sure you want to delete " + tableBox.SelectedItem.ToString() + "?", "Are you sure?", MessageBoxButtons.YesNo);
+
+            if (yesOrNo == DialogResult.Yes)
+            {
+                database.DropTable(tableBox.SelectedItem.ToString());
+                updateDatabasePanel();
+            }
+        }
+
+        private void MainForm2_ResizeBegin(object sender, EventArgs e)
+        {
+            SuspendLayout();
+        }
+
+        private void MainForm2_ResizeEnd(object sender, EventArgs e)
+        {
+            ResumeLayout();
+        }
+
+        private void countEntries(string filename)
+        {
+            int linecount = File.ReadLines(filename).Count();
+
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                entriesLabel.Text = formatNumber(linecount);
+            });
+
+            int columncount = LogiText.Data.Parser.getColumnCount(filename);
+
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                columnLabel.Text = formatNumber(columncount);
+            });
+            return;
+        }
+
+        private void fileList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (fileList.SelectedItems.Count == 0)
+            {
+                insertionBox.Enabled = false;
+                columnLabel.Text  = "0";
+                entriesLabel.Text = "0";
+                return;
+            }
+
+            if (database != null) insertionBox.Enabled = true;
+
+            string filename = fileList.SelectedItems[0].Text;
+
+            threads.Add(new Thread(i => this.countEntries((string)i)));
+            threads[threads.Count - 1].Start(filename);
+
+            threads.Add(new Thread(this.populateFileOptions));
+            threads[threads.Count - 1].Start();
+        }
+
+        private void populateTableOptions()
+        {
+            string item = "";
+
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                item = tableBox.SelectedItem.ToString();
+                tableColumns.Items.Clear();
+            });
+
+            List<string> databaseColumns = database.ColumnNames(item);
+
+            foreach (string column in databaseColumns)
+                this.Invoke((MethodInvoker)delegate ()
+                {
+                    if (!LogiText.Data.Book.fieldNames.Contains(column))
+                        tableColumns.Items.Add(column).BackColor = Color.Orange;
+                    else
+                        tableColumns.Items.Add(column);
+                });
+
+            bool is_selected = false;
+
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                is_selected = fileList.SelectedItems.Count > 0;
+            });
+
+            if (is_selected)
+            {
+                this.populateFileOptions();
+            }
+        }
+
+        private void populateFileOptions()
+        {
+            List<string> columns = new List<string>();
+            string file_type = "";
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                string[] parts = fileList.SelectedItems[fileList.SelectedIndices[0]].Text.Split('.');
+                file_type = parts[parts.Length - 1];
+                fileColumns.Items.Clear();
+
+                foreach (ListViewItem item in tableColumns.Items)
+                    columns.Add(item.Text);
+            });
+
+
+            if (supported_types.Contains(file_type.ToLower()))
+            {
+                foreach (string column in LogiText.Data.Book.fieldNames)
+                    this.Invoke((MethodInvoker)delegate ()
+                    {
+                        if (!columns.Contains(column))
+                            fileColumns.Items.Add(column).BackColor = Color.Orange;
+                        else
+                            fileColumns.Items.Add(column);
+                    });
+            }
+        }
+
+        private void tableBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tableBox.SelectedItems.Count == 0) { insertOptions.Enabled = false; return; }
+
+            insertOptions.Enabled = true;
+
+            threads.Add(new Thread(this.populateTableOptions));
+            threads[threads.Count - 1].Start();
+        }
+
+        private void runButton_Click(object sender, EventArgs e)
+        {
+            /**/ if (runButton.Text == "Run")
+            {
+                toolStripProgressBar1.Visible = true;
+                insertionWorker.RunWorkerAsync();
+                runButton.Text = "Cancel";
+            }
+            else if (MessageBox.Show("Are you sure you want to cancel the insertion?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes
+                && insertionWorker.IsBusy)
+            {
+                toolStripProgressBar1.Visible = false;
+                runButton.Text = "Run";
+                insertionWorker.CancelAsync();
+            }
+        }
+
+        private void insertionWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                if (insertionWorker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    insertionWorker.ReportProgress(0);
+                    return;
+                }
+
+                Thread.Sleep(100);
+                insertionWorker.ReportProgress(i);
+            }
+        }
+
+        private void insertionWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            toolStripProgressBar1.Value = e.ProgressPercentage;
+            progressBar1.Value = e.ProgressPercentage;
+            updateLabel.Text = progressBar1.Value.ToString() + "%";
+            statusLabel.Text = "Insertion Process " + updateLabel.Text;
+        }
+
+        private void insertionWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            toolStripProgressBar1.Visible = false;
+            statusLabel.Text = "Ready";
+            updateLabel.Text = "Click run to begin insertion";
+            runButton.Text = "Run";
         }
     }
 }

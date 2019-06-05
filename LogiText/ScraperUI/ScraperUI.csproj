@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\classes\Prompt.cs" />
     <Compile Include="src\classes\Settings.cs" />
     <Compile Include="src\classes\MainForm2.cs">
       <SubType>Form</SubType>
