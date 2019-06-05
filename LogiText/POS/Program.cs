@@ -37,14 +37,27 @@ namespace POS
             bookTest.imgURL = "https://test.com";
             bookTest.used_prices = "10";
             bookTest.new_prices = "12";
-            */
+            
 
-            Data.MySql sql = new Data.MySql(connString);
+
+
+            
             List<string> tables = sql.ListTables();
             foreach (string t in tables)
             {
                 Console.WriteLine(t);
             }
+            */
+
+            // FIX :: '' AROUND DATA
+            
+
+            Data.MySql sql = new Data.MySql(connString);
+            //sql.InsertRecord("Test3", "name, test", "'testie', 'testie1'");
+
+            //Book bookTest = sql.GetBook("Test3", "test", "testie1");
+            DataTable t = sql.ReadAll("Test1", 10);
+
         }
     }
 }
